@@ -15,7 +15,6 @@
             android:id="@+id/icon"
             android:layout_margin="24dp"
             android:layout_width="60dp"
-            android:src="@drawable/img"
             android:scaleType="centerInside"
             android:clipToOutline="true"
             android:background="@drawable/shape_icon"
@@ -54,7 +53,6 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
                 android:textSize="15sp"
                 android:padding="5dp"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
