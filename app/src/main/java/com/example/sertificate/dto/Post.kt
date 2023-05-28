@@ -9,8 +9,8 @@ class Post (
     val shares : Int,
 )
 class GetPost(
-    val message: Any,
-    val post: List<Post>,
+    val message: Any? = null,
+    val post: ListPosts,
 )
 class Author(
     val name : String,

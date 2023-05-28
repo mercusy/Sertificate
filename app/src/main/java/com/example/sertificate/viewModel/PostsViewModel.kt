@@ -1,10 +1,12 @@
 package com.example.sertificate.viewModel
 
 import android.app.Application
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.sertificate.dto.GetPost
+import com.example.sertificate.dto.ListPosts
 import com.example.sertificate.dto.Post
 import com.example.sertificate.network.PostsRetrofit
 import retrofit2.Call
@@ -15,7 +17,7 @@ sealed interface PostsState{
 
     object Loading : PostsState
     class Error(val message: String) : PostsState
-    class Success(val posts: GetPost) : PostsState
+    class Success(val posts: ArrayList<Post>) : PostsState
 }
 
 class PostsViewModel(application: Application) : AndroidViewModel(application) {
@@ -29,13 +31,11 @@ class PostsViewModel(application: Application) : AndroidViewModel(application) {
             .enqueue(object: Callback<GetPost> {
                 override fun onResponse(call: Call<GetPost>, response: Response<GetPost>) {
                     if (response.isSuccessful) {
-                        val allPosts = response.body()!!
-                        liveData.value = PostsState.Success(allPosts)
+                        val allPosts = response.body()
+                        liveData.value = PostsState.Success(allPosts?.post?: arrayListOf())
                     }
                     else {
                         liveData.value = PostsState.Error(response.message())
-                        Toast.makeText(getApplication(), "${response.body()}", Toast.LENGTH_SHORT).show()
-
                     }
                 }
 

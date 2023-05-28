@@ -1,6 +1,7 @@
 package com.example.sertificate.network
 
 import com.example.sertificate.dto.GetPost
+import com.example.sertificate.dto.ListPosts
 import com.example.sertificate.dto.Post
 import com.example.sertificate.dto.SetPost
 import retrofit2.Call

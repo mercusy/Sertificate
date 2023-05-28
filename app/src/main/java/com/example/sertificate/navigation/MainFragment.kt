@@ -23,14 +23,14 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMainBinding.bind(view)
 
-        binding.recycler.layoutManager = LinearLayoutManager(requireContext())
 
-        viewModel.load()
+
+        binding.recycler.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel.liveData.observe(viewLifecycleOwner) { state ->
             when(state) {
                 is PostsState.Success -> {
-                    binding.recycler.adapter = CardAdapter(state.posts.post)
+                    binding.recycler.adapter = CardAdapter(state.posts)
                 }
                 is PostsState.Error ->{
                     Toast.makeText(requireContext(), "while", Toast.LENGTH_SHORT).show()
@@ -40,6 +40,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 }
             }
         }
+        viewModel.load()
         binding.add.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_addPostFragment)
 
