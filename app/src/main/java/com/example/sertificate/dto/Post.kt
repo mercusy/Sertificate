@@ -9,11 +9,15 @@ class Post (
     val shares : Int,
 )
 class GetPost(
-    val message: String?,
-    val post: Post,
+    val message: Any,
+    val post: List<Post>,
 )
 class Author(
     val name : String,
     val avtar : String
 )
-class PostsList: ArrayList<GetPost>()
+class SetPost(
+    val author: String,
+    val content: String,
+)
+class ListPosts: ArrayList<Post>()
