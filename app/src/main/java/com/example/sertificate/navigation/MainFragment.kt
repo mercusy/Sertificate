@@ -35,12 +35,16 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 is PostsState.Error ->{
                     Toast.makeText(requireContext(), "while", Toast.LENGTH_SHORT).show()
                 }
-                else->{
-                    Toast.makeText(requireContext(), "error", Toast.LENGTH_SHORT).show()
+                is PostsState.Loading->{
+
+                }
+                is PostsState.Done->{
+
                 }
             }
         }
         viewModel.load()
+
         binding.add.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_addPostFragment)
 

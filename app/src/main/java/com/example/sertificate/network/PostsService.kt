@@ -1,9 +1,8 @@
 package com.example.sertificate.network
 
 import com.example.sertificate.dto.GetPost
-import com.example.sertificate.dto.ListPosts
-import com.example.sertificate.dto.Post
 import com.example.sertificate.dto.SetPost
+import com.example.sertificate.dto.SetPostResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -14,5 +13,5 @@ interface PostsService {
     fun getPost() : Call<GetPost>
 
     @POST("posts")
-    fun setPost(@Body post: SetPost) : Call<GetPost>
+    fun setPost(@Body post: SetPost) : Call<SetPostResponse>
 }
