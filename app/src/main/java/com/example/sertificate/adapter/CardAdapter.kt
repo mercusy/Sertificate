@@ -25,9 +25,9 @@ class CardAdapter(private val items: List<Post>): Adapter<CardAdapter.CardHolder
         val icon: ImageView = holder.itemView.findViewById(R.id.icon)
         val content: TextView = holder.itemView.findViewById(R.id.content)
         author.text = item.author.name
-        Picasso.get()
-            .load(item.author.avtar)
-            .into(icon)
+//        Picasso.get()
+//            .load(item.author.avtar)
+//            .into(icon)
         content.text = item.content
 
     }

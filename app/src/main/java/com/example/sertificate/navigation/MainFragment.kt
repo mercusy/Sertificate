@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sertificate.R
 import com.example.sertificate.adapter.CardAdapter
 import com.example.sertificate.databinding.FragmentMainBinding
+import com.example.sertificate.dto.Author
 import com.example.sertificate.dto.Post
 import com.example.sertificate.viewModel.PostsState
 import com.example.sertificate.viewModel.PostsViewModel
@@ -23,9 +24,12 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMainBinding.bind(view)
 
-
+        val list = listOf<Post>(
+            Post(1,"hello", Author("hi",""),2,2,4)
+        )
 
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
+
 
         viewModel.liveData.observe(viewLifecycleOwner) { state ->
             when(state) {
