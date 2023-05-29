@@ -5,12 +5,12 @@ class Post (
     val content: String,
     val author: Author,
     val comments : Int,
-    val liked : Int,
+    val likes : Int,
     val shares : Int,
 )
 class GetPost(
-    val message: Any?,
-    val post: List<Post>,
+    val message: Any,
+    val posts: ListPost,
 )
 class SetPostResponse(
     val message: Any?,
@@ -18,9 +18,10 @@ class SetPostResponse(
 )
 class Author(
     val name : String,
-    val avtar : String
+    val avatar : String
 )
 class SetPost(
     val author: String,
-    val content: String,
+    val content: String
 )
+class ListPost: ArrayList<Post>()

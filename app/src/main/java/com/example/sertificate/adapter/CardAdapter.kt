@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.sertificate.R
+import com.example.sertificate.dto.GetPost
 import com.example.sertificate.dto.Post
 import com.squareup.picasso.Picasso
 
@@ -24,10 +25,16 @@ class CardAdapter(private val items: List<Post>): Adapter<CardAdapter.CardHolder
         val author: TextView = holder.itemView.findViewById(R.id.Title)
         val icon: ImageView = holder.itemView.findViewById(R.id.icon)
         val content: TextView = holder.itemView.findViewById(R.id.content)
+        val likes: TextView = holder.itemView.findViewById(R.id.likes)
+        val comments: TextView = holder.itemView.findViewById(R.id.comments)
+        val shares: TextView = holder.itemView.findViewById(R.id.shares)
+        likes.text = item.likes.toString()
+        shares.text = item.shares.toString()
+        comments.text = item.comments.toString()
         author.text = item.author.name
-//        Picasso.get()
-//            .load(item.author.avtar)
-//            .into(icon)
+        Picasso.get()
+            .load(item.author.avatar)
+            .into(icon)
         content.text = item.content
 
     }

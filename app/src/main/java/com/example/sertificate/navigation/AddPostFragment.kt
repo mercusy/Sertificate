@@ -23,10 +23,10 @@ class AddPostFragment : Fragment(R.layout.fragment_add_post) {
         binding = FragmentAddPostBinding.bind(view)
 
         binding.done.setOnClickListener {
-            val name : String = binding.author.toString()
-            val text : String = binding.content.toString()
-            if (name.isNotEmpty() && text.isNotEmpty()){
-                val post = SetPost(name,text)
+            val author : String = binding.author.text.toString()
+            val content : String = binding.content.text.toString()
+            if (author.isNotEmpty() && content.isNotEmpty()){
+                val post = SetPost(author,content)
                 viewModel.setPost(post)
             }
         }
@@ -41,5 +41,4 @@ class AddPostFragment : Fragment(R.layout.fragment_add_post) {
             }
         }
     }
-
 }

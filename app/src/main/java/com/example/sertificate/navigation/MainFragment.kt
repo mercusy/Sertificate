@@ -34,7 +34,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         viewModel.liveData.observe(viewLifecycleOwner) { state ->
             when(state) {
                 is PostsState.Success -> {
-                    binding.recycler.adapter = CardAdapter(state.posts)
+                    binding.recycler.adapter = CardAdapter(state.posts.posts)
                 }
                 is PostsState.Error ->{
                     Toast.makeText(requireContext(), "while", Toast.LENGTH_SHORT).show()

@@ -21,7 +21,7 @@ sealed interface PostsState{
     object Loading : PostsState
     object Done : PostsState
     class Error(val message: String) : PostsState
-    class Success(val posts: List<Post>) : PostsState
+    class Success(val posts: GetPost) : PostsState
 }
 
 class PostsViewModel(application: Application,) : AndroidViewModel(application) {
@@ -31,28 +31,19 @@ class PostsViewModel(application: Application,) : AndroidViewModel(application) 
     private val postsService = PostsRetrofit.postsService
 
     fun load(){
-        postsService.getPost()
-            .enqueue(object: Callback<GetPost> {
-                override fun onResponse(call: Call<GetPost>, response: Response<GetPost>) {
-                    if (response.isSuccessful) {
-                        val allPosts = response.body()
-                        Toast.makeText(getApplication(), "$allPosts", Toast.LENGTH_SHORT).show()
-                        if (allPosts != null) {
-                            liveData.value = PostsState.Success(allPosts.post)
-                            Toast.makeText(getApplication(), "success", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                    else {
-                        Toast.makeText(getApplication(), "${response.body()}", Toast.LENGTH_SHORT).show()
-                        liveData.value = PostsState.Error(response.body().toString())
-                    }
-                }
+        viewModelScope.launch(Dispatchers.IO){
+            val response = postsService.getPost().execute()
 
-                override fun onFailure(call: Call<GetPost>, t: Throwable) {
-                    liveData.value = PostsState.Error(t.message ?: "Error on request")
+            launch(Dispatchers.Main){
+                if (response.isSuccessful) {
+                    liveData.value = response.body()?.let { PostsState.Success(it) }
                 }
-
-            })
+                else {
+                    Toast.makeText(getApplication(), "${response.body()}", Toast.LENGTH_SHORT).show()
+                    liveData.value = PostsState.Error(response.body().toString())
+                }
+            }
+        }
     }
     fun setPost(post: SetPost){
         liveData.value = PostsState.Loading
@@ -63,7 +54,6 @@ class PostsViewModel(application: Application,) : AndroidViewModel(application) 
                 if (response.isSuccessful){
                     Toast.makeText(getApplication(), "${response.body()}", Toast.LENGTH_SHORT).show()
                 }
-
             }
             override fun onFailure(call: Call<SetPostResponse>, t: Throwable) {
 

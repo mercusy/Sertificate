@@ -75,6 +75,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
             <TextView
+                android:id="@+id/likes"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:text="hi"
@@ -83,6 +84,7 @@
                 android:layout_weight="1"
                 app:drawableStartCompat="@drawable/ic_baseline_favorite_border_24" />
             <TextView
+                android:id="@+id/shares"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:text="hi"
@@ -91,6 +93,7 @@
                 android:layout_weight="1"
                 app:drawableStartCompat="@drawable/ic_baseline_share_24" />
             <TextView
+                android:id="@+id/comments"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:text="hi"
